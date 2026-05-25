@@ -679,13 +679,20 @@
 }
 .music-player { 
     position: fixed; 
-    bottom: 30px; /* Separación del borde inferior */
-    right: 30px;  /* Separación del borde derecho */
+    bottom: 30px; 
+    left: 30px;   
     z-index: 9999; 
     cursor: pointer; 
-    /* Agregué un pequeño fondo para que resalte sobre cualquier foto o color */
     background: rgba(255, 255, 255, 0.8);
-    padding: 5px;
+    
+    /* Ajustes para hacerlo más pequeño */
+    padding: 8px;            /* Reduce este valor para hacerlo más pequeño */
+    width: 40px;             /* Define un ancho fijo */
+    height: 40px;            /* Define una altura fija igual al ancho */
+    display: flex;           /* Ayuda a centrar el icono dentro */
+    align-items: center;
+    justify-content: center;
+    
     border-radius: 50%;
     box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
