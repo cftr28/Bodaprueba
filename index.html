@@ -109,19 +109,104 @@
         }
 
         /* --- SECCIÓN 1: CABECERA --- */
+       /* --- SECCIÓN 1: CABECERA (ACTUALIZADA CON FOTO DE FONDO) --- */
         .header-section {
+            position: relative; /* Permite posicionar elementos encima */
             text-align: center;
-            padding: 60px 20px;
             width: 100%;
             box-sizing: border-box;
-            background-image: url('fondo1.png');
-            background-size: cover;
-            background-position: center;
+            min-height: 75vh; /* Ajusta la altura de la cabecera en pantallas grandes */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .header-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Hace que la imagen llene el espacio sin deformarse */
+            z-index: 1;
+            /* Opcional: Descomenta la línea de abajo si quieres oscurecer un poco la foto para que el texto blanco resalte más */
+            /* filter: brightness(0.85); */
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2; /* Se posiciona por encima de la imagen de fondo */
+            padding: 60px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            min-height: 40vh;
             justify-content: center;
+        }
+
+        /* Cambiamos el color de los textos a blanco para que contrasten con la foto de fondo, similar a tu referencia */
+        .cursive { 
+            font-family: 'Great Vibes', cursive; 
+            font-size: clamp(2rem, 8vw, 3.5rem); 
+            margin: 0; 
+            font-weight: normal; 
+            color: #ffffff; /* Blanco */
+            animation: fadeInCursive 1.5s ease-out forwards;
+            opacity: 0;
+            text-shadow: 0px 2px 10px rgba(0,0,0,0.3); /* Sombra suave para mejorar lectura */
+        }
+        
+        .nombres-tit { 
+            font-family: 'Bodoni Moda', serif; 
+            font-size: clamp(2.5rem, 12vw, 4.5rem); 
+            margin: 10px 0 0 0; 
+            font-weight: 400; 
+            color: #000000; /* Blanco */
+            position: relative; 
+            animation: revealNames 2.5s cubic-bezier(0.2, 0, 0.2, 1) forwards;
+            animation-delay: 0.5s;
+            opacity: 0;
+            line-height: 1.1;
+            text-shadow: 0px 2px 15px rgba(0,0,0,0.4);
+        }
+
+        /* Ajustamos el botón de música para que sea visible sobre la foto */
+        .play-button {
+            width: 45px; height: 45px;
+            border: 1.5px solid #ffffff; /* Blanco */
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            position: relative;
+            transition: all 0.3s ease;
+            background-color: rgba(0,0,0,0.15); /* Fondo sutil */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .play-button::after {
+            content: '';
+            width: 0; height: 0;
+            border-top: 6px solid transparent;
+            border-bottom: 6px solid transparent;
+            border-left: 10px solid #ffffff; /* Blanco */
+            margin-left: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .music-playing .play-button::after {
+            content: '';
+            width: 10px; height: 12px;
+            border-left: 3px solid #ffffff; /* Blanco */
+            border-right: 3px solid #ffffff; /* Blanco */
+            border-top: 0;
+            border-bottom: 0;
+            margin-left: 0;
+        }
+
+        /* Ajuste responsivo para celulares: controlamos la altura de la foto principal */
+        @media (max-width: 480px) {
+            .header-section {
+                min-height: 60vh; /* Altura ideal para la cabecera en móviles */
+            }
         }
 
         .music-player { margin-bottom: 30px; cursor: pointer; }
@@ -613,18 +698,21 @@
         <div class="loader-line"></div>
     </div>
 
-    <audio id="musica-boda" loop>
-        <source src="musica.mp3" type="audio/mpeg">
-    </audio>
-
+ <!-- --- SECCIÓN 1: CABECERA (CORREGIDA) --- -->
     <div class="header-section">
-        <div class="music-player" id="boton-musica">
-            <div class="play-button"></div>
-        </div>
-        <p class="cursive">¡Nos casamos!</p>
-        <h1 class="nombres-tit">Sofía & Alejandro</h1>
-    </div>
+        <!-- Imagen de fondo -->
+        <img src="foto200.png" class="header-bg" alt="Sofía y Alejandro">
         
+        <!-- El contenido ahora está DENTRO de la sección para heredar la posición absoluta -->
+       
+    </div>
+     <div class="header-content">
+            <div class="music-player" id="boton-musica">
+                <div class="play-button"></div>
+            </div>
+            <p class="cursive">¡Nos casamos!</p>
+            <h1 class="nombres-tit">Sofía & Alejandro</h1>
+        </div>
     <div class="escena-invitacion">
         <div class="sobre-container">
             <div class="iniciales-dd">S A</div>
